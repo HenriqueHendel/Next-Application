@@ -1,9 +1,11 @@
+import {Title} from '../styles/pages/Home';
+
 export default function Home() {
   return (
     <div>
-      <h1>
+      <Title>
         Hello World
-      </h1>
+      </Title>
     </div>
   )
 }
