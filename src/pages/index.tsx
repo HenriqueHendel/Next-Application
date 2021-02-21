@@ -1,11 +1,30 @@
+import {useEffect, useState} from 'react'
 import {Title} from '../styles/pages/Home';
 
+interface IProducts {
+  id: string
+  title: string
+}
+
 export default function Home() {
+  const [recommendedProducts, setRecommendedProducts] = useState<IProducts[]>([])
+
+  useEffect(()=>{
+    fetch('http://localhost:3333/recommended').then(response => {
+      response.json().then(data =>  setRecommendedProducts(data))
+    })
+  }, [])
+
   return (
     <div>
-      <Title>
-        Hello World
-      </Title>
+      <section>
+          <Title>Products</Title>
+          <ul>
+            {recommendedProducts ? recommendedProducts.map(recommendedProduct => (
+              <li key={recommendedProduct.id}>{recommendedProduct.title}</li>
+            )): null}
+          </ul>
+      </section>
     </div>
   )
 }
